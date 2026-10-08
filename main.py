@@ -18,6 +18,12 @@ for idx, question in enumerate(QUIZ_QUESTIONS):
         print(option)
 
     answer = input(f"\n{current}, enter your answer (A/B/C/D): ").upper().strip()
+    while True:
+        if answer in ["A", "B", "C", "D"]:
+            break
+        print("invalid input")
+        answer = input(f"\n{current}, enter your answer (A/B/C/D): ").upper().strip()
+
     if answer == question["answer"].upper():
         print("Correct!👍\n")
         scores[current] += 1
