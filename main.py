@@ -2,7 +2,13 @@ import random
 from questions import QUIZ_QUESTIONS
 
 contestant_1 = input("Enter the name of contestant 1: ")
+while contestant_1 == "":
+    print("Invalid input. Please enter a valid name for contestant 1.")
+    contestant_1 = input("Enter the name of contestant 1: ")
 contestant_2 = input("Enter the name of contestant 2: ")
+while contestant_2 == "":
+    print("Invalid input. Please enter a valid name for contestant 2.")
+    contestant_2 = input("Enter the name of contestant 2: ")
 
 print(f"\nWelcome {contestant_1} and {contestant_2} to the competition!")
 print("Let's start the quiz!\n")
@@ -19,12 +25,31 @@ for idx, question in enumerate(QUIZ_QUESTIONS):
 
     answer = input(f"\n{current}, enter your answer (A/B/C/D): ").upper().strip()
     while True:
-        if answer in ["A", "B", "C", "D"]:
+        if answer == "A":
+            answer = question["options"][0][3:] # Remove "A) "
             break
-        print("invalid input")
-        answer = input(f"\n{current}, enter your answer (A/B/C/D): ").upper().strip()
+        elif answer == "B":
+            answer = question["options"][1][3:] # Remove "B) " 
+            break
+        elif answer == "C":
+            answer = question["options"][2][3:] # Remove "C) "
+            break
+        elif answer == "D":
+            answer = question["options"][3][3:] # Remove "D) "
+            break
+        else:
+            print("Invalid option. Please enter A, B, C, or D.") 
+            answer = input(f"\n{current}, enter your answer (A/B/C/D): ").upper().strip()
+    for question in QUIZ_QUESTIONS:
+        optionss = [option[3:] for option in question["options"]]
+        option_shuffle = []
+        for option in optionss:
+            option_shuffle.append(option)
+        for question in QUIZ_QUESTIONS:
+            
 
-    if answer == question["answer"].upper():
+            
+    if answer == question["answer"].strip():
         print("Correct!👍\n")
         scores[current] += 1
     else:
